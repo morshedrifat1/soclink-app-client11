@@ -1,12 +1,40 @@
-# React + Vite
+# 🌐 SocLink — Social Development Events Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![SocLink Banner](https://user-images.githubusercontent.com/placeholder/banner.png) <!-- optional banner image -->
 
-Currently, two official plugins are available:
+**SocLink** is a community-driven platform that empowers users to create, manage, and join social service events in their local area. Whether it's a charity drive, environmental cleanup, or awareness campaign — SocLink connects people with purpose.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 **Live Site:** [https://soclink-app.web.app/](https://soclink-app.web.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- 📝 **Create Events** — Registered users can create events with location, date, and description.
+- 🙋 **Join Events** — Community members can browse and apply to participate in listed events.
+- 📋 **Manage Events** — Organizers can manage attendees and event details from their dashboard.
+- 📍 **Location-Based Discoverability** — Events are discoverable based on user's local area.
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- ⚡️ Vite
+- ⚛️ React
+- 🌐 React Router
+- 💨 Tailwind CSS
+- 🌼 DaisyUI
+- 🔥 Firebase (Authentication + Authorization + Hosting)
+
+**Backend:**
+- 🛠 Express.js
+- 🍃 MongoDB (via Mongoose)
+
+---
+
+## 🔑 Firebase Features
+
+- Email/Password Signup & Login
+- Real-time Auth State
+- JWT Token-based API Security
