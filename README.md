@@ -27,7 +27,7 @@
 
 **Backend:**
 - 🛠 Express.js
-- 🍃 MongoDB (via Mongoose)
+- 🍃 MongoDB
 
 ---
 
