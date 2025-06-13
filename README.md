@@ -1,7 +1,5 @@
 # 🌐 SocLink — Social Development Events Platform
 
-![SocLink Banner](https://user-images.githubusercontent.com/placeholder/banner.png) <!-- optional banner image -->
-
 **SocLink** is a community-driven platform that empowers users to create, manage, and join social service events in their local area. Whether it's a charity drive, environmental cleanup, or awareness campaign — SocLink connects people with purpose.
 
 🚀 **Live Site:** [https://soclink-app.web.app/](https://soclink-app.web.app/)
