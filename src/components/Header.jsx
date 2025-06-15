@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
@@ -10,7 +10,6 @@ import { Slide, toast } from "react-toastify";
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
   const { user, userSignout } = use(AuthContext);
-  const [showDropdown, setShowDropdown] = useState(false);
   const navLink = (
     <>
       <li className="text-base font-medium ">
@@ -126,9 +125,10 @@ const Header = () => {
                 />{" "}
               </svg>
             </div>
-            <ul
+            <div className="w-full relative">
+              <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-8 w-52 p-2 shadow space-y-2"
+              className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-8 w-52 p-2 shadow space-y-2 "
             >
               <li>
                 <div className="avatar space-x-2 py-2.5">
@@ -160,18 +160,21 @@ const Header = () => {
                 )}
               </li>
             </ul>
+            </div>
           </div>
           <Link to={"/"}>
             <img className="w-40" src={darkMode ? darkLogo : logo} alt="" />
           </Link>
         </div>
-        <div className="navbar-center hidden xl:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="flex gap-3">{navLink}</ul>
         </div>
         <div className="navbar-end space-x-5 relative">
-          <div className=" lg:flex  flex-col hidden">
+          <div className=" lg:flex  flex-col hidden dropdown">
             {user && (
               <div
+              role="button"
+              tabIndex={0}
                 onClick={() => setShowDropdown(!showDropdown)}
                 className="group"
               >
@@ -179,23 +182,15 @@ const Header = () => {
                   src={user ? user?.photoURL : userImg}
                   className="hidden ring-offset-base-100 sm:inline ring-btn w-10 h-10 rounded-full ring-1 ring-offset-3 cursor-pointer"
                 />
-                <p className="absolute top-13 right-1/3 z-10 bg-black text-white text-base px-5 rounded-full hidden group-hover:inline">
+                <p className="absolute top-13 z-10 bg-black text-white text-base px-5 whitespace-nowrap w-auto rounded-full opacity-0 group-hover:opacity-100">
                   {user?.displayName}
                 </p>
               </div>
             )}
             <div
-              className={`absolute top-20 right-1/3 p-3 bg-base-200 shadow rounded-lg ${
-                showDropdown ? "inline" : "hidden"
-              }`}
+              className={`absolute top-20  p-3 bg-base-200 shadow rounded-lg dropdown-content z-[1] w-auto whitespace-nowrap`}
             >
               {navLinkDropdown}
-              {/* <button
-                onClick={handleSignOut}
-                className="btn bg-gradient-to-r from-primary to-secondary text-white shadow-none px-5 sm:px-6 sm:flex items-center hidden border-0"
-              >
-                <CiLogout size={22} /> Logout
-              </button> */}
             </div>
           </div>
           <div>
