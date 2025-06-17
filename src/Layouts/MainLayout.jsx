@@ -9,7 +9,7 @@ const MainLayout = () => {
             <header>
                 <Header></Header>
             </header>
-            <main className='max-w-[1420px] mx-auto'>
+            <main>
                 <Outlet></Outlet>
             </main>
             <footer>

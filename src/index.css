@@ -35,7 +35,7 @@
   --color-base-content:#94a3b8;
   --color-mainborder:#94a3b810;
   --color-border-outline:#1d3b8b;
-    --color-navlink:#fafafa
+  --color-navlink:#fafafa
 
 }
 
@@ -43,4 +43,37 @@
     --color-mainborder:#e2e8f0;
     --color-border-outline:#94a3b880;
     --color-navlink:#0a1126
+}
+
+
+/* loading spiner animation css */
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 3s ease-in-out infinite;
+}
+}
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
 }

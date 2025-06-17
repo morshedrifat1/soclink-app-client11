@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { use, useState } from "react";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { Link, NavLink } from "react-router";
 import logo from "../assets/logo.png";
@@ -175,7 +175,6 @@ const Header = () => {
               <div
               role="button"
               tabIndex={0}
-                onClick={() => setShowDropdown(!showDropdown)}
                 className="group"
               >
                 <img

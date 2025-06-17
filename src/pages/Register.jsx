@@ -4,7 +4,7 @@ import { CiImageOn, CiMail } from "react-icons/ci";
 import { GoLock, GoMail } from "react-icons/go";
 import { AiOutlineEye } from "react-icons/ai";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FiUser } from "react-icons/fi";
 import { Slide, toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
@@ -12,6 +12,8 @@ import { updateProfile } from "firebase/auth";
 const Register = () => {
   const [seePasswor, setSeepassword] = useState(false);
   const {userSignUp, googleSignin } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -111,6 +113,8 @@ const Register = () => {
               transition: Slide,
             });
             e.target.reset();
+            navigate(location.state?`${location.state}`:"/", { replace: true });
+
           })
           .catch((error) => {
             toast.error(error.message, {
@@ -138,6 +142,8 @@ const Register = () => {
             hideProgressBar: true,
             transition: Slide,
           });
+        navigate(location.state?`${location.state}`:"/", { replace: true });
+
       })
       .catch((error)=>{
         toast.error(error.message, {

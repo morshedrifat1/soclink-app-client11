@@ -7,6 +7,7 @@ import ManageEvents from "../pages/ManageEvents";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import UpcomingEvents from "../pages/UpcomingEvents ";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -14,12 +15,12 @@ export const router = createBrowserRouter([
     Component: MainLayout,
     children: [
         { index: true, Component: Home },
-        {path:'/create-event',Component:CreateEvent},
-        {path:'/join-event',Component:JoinEvent},
-        {path:'/manage-events',Component:ManageEvents},
-        {path:'/auth/login',Component:Login},
-        {path:'/auth/register',Component:Register},
-        {path:'/upcoming-events',Component:UpcomingEvents}
+        {path:'create-event',element:<PrivateRoute><CreateEvent></CreateEvent></PrivateRoute>},
+        {path:'join-event',Component:JoinEvent},
+        {path:'manage-events',Component:ManageEvents},
+        {path:'auth/login',Component:Login},
+        {path:'auth/register',Component:Register},
+        {path:'upcoming-events',Component:UpcomingEvents}
     ],
   },
 ]);

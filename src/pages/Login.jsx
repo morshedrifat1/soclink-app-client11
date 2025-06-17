@@ -3,12 +3,15 @@ import icon from "../assets/fav-icon.png";
 import { GoLock, GoMail } from "react-icons/go";
 import { AiOutlineEye } from "react-icons/ai";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { Slide, toast } from "react-toastify";
 const Login = () => {
   const [seePasswor, setSeepassword] = useState(false);
   const {userLogin,googleSignin} = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,6 +26,7 @@ const Login = () => {
           hideProgressBar: true,
           transition: Slide,
         });
+        navigate(location.state?`${location.state}`:"/", { replace: true });
         e.target.reset();
     })
     .catch((error)=>{
@@ -42,6 +46,7 @@ const Login = () => {
           hideProgressBar: true,
           transition: Slide,
         });
+        navigate(location.state?`${location.state}`:"/", { replace: true });
     })
     .catch((error)=>{
       toast.error(error.message, {
@@ -150,7 +155,7 @@ const Login = () => {
           <p className="text-center text-base-content text-base mt-4">
             Dont’t Have An Account ?
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-semibold cursor-pointer">
-              <Link to={"/auth/register"}> Sign Up</Link>
+              <Link to={"/auth/register"} state={location.state}> Sign Up</Link>
             </span>
           </p>
         </div>
