@@ -21,7 +21,10 @@
   --color-base-content:#64748b;
   --color-mainborder:#e2e8f0;
   --color-border-outline:#94a3b880;
-  --color-navlink:#0a1126
+  --color-navlink:#0a1126;
+  --color-heading:#0a1126;
+  --color-subHeading:#e4e7f1;
+
 
 }
 
@@ -35,14 +38,18 @@
   --color-base-content:#94a3b8;
   --color-mainborder:#94a3b810;
   --color-border-outline:#1d3b8b;
-  --color-navlink:#fafafa
+  --color-navlink:#fafafa;
+  --color-heading:#fafafa;
+  --color-subHeading:#16295a;
 
 }
 
 @theme{
     --color-mainborder:#e2e8f0;
     --color-border-outline:#94a3b880;
-    --color-navlink:#0a1126
+    --color-navlink:#0a1126;
+    --color-heading:#0a1126;
+    --color-subHeading:#e4e7f1;
 }
 
 

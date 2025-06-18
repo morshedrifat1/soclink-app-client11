@@ -104,7 +104,7 @@ const Header = () => {
       });
   };
   return (
-    <div className="bg-base-200">
+    <div className="">
       <div className="navbar max-w-[1420px] rounded-lg mx-auto px-5 h-20">
         <div className="navbar-start">
           <div className="dropdown">

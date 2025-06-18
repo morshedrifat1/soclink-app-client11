@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
-import Home from "../pages/Home";
+import Home from "../pages/Home/Home";
 import CreateEvent from "../pages/CreateEvent";
 import JoinEvent from "../pages/JoinEvent";
 import ManageEvents from "../pages/ManageEvents";
@@ -16,8 +16,8 @@ export const router = createBrowserRouter([
     children: [
         { index: true, Component: Home },
         {path:'create-event',element:<PrivateRoute><CreateEvent></CreateEvent></PrivateRoute>},
-        {path:'join-event',Component:JoinEvent},
-        {path:'manage-events',Component:ManageEvents},
+        {path:'join-event',element:<PrivateRoute><JoinEvent></JoinEvent></PrivateRoute>},
+        {path:'manage-events',element:<PrivateRoute><ManageEvents></ManageEvents></PrivateRoute>},
         {path:'auth/login',Component:Login},
         {path:'auth/register',Component:Register},
         {path:'upcoming-events',Component:UpcomingEvents}

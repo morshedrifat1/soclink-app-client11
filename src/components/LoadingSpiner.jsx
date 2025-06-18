@@ -1,15 +1,8 @@
 import React from 'react';
 import { Heart, Users, MapPin, HandHeart, Home, Calendar } from "lucide-react"
-const LoadingSpiner = () => {
-    return (
-<div className="flex items-center justify-center h-screen">
-      <CommunitySpinner />
-    </div>
-  )
-}
 
-function CommunitySpinner() {
-  const icons = [
+const LoadingSpiner = () => {
+    const icons = [
     { Icon: Users, delay: 0 },
     { Icon: Heart, delay: 0.2 },
     { Icon: MapPin, delay: 0.4 },
@@ -19,7 +12,8 @@ function CommunitySpinner() {
   ]
 
   return (
-    <div className="relative w-16 h-16">
+    <div className='flex justify-center items-center h-screen'>
+      <div className="relative w-16 h-16">
       {/* Central pulsing core */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-5 h-5 bg-gradient-to-r from-primary to-secondary rounded-full opacity-80" />
@@ -56,6 +50,7 @@ function CommunitySpinner() {
         <div className="w-12 h-12 border-2 border-gray-200 rounded-full animate-pulse opacity-30" />
         <div className="absolute w-14 h-14 border border-[#1b6fb9] rounded-full animate-ping opacity-10" />
       </div>
+    </div>
     </div>
     );
 };
