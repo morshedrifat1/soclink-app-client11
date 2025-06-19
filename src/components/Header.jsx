@@ -128,7 +128,7 @@ const Header = () => {
             <div className="w-full relative">
               <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-8 w-52 p-2 shadow space-y-2 "
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-6 w-52 p-2 space-y-2 "
             >
               <li>
                 <div className="avatar space-x-2 py-2.5">

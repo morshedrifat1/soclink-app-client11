@@ -22,7 +22,7 @@ const FeaturesSection = () => {
       </Fade>
       <Fade>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-7">
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Calendar className="text-white" size={25} />
           </div>
@@ -34,7 +34,7 @@ const FeaturesSection = () => {
             interface. Set dates, locations, and track participation.
           </p>
         </div>
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Users className="text-white" size={25} />
           </div>
@@ -46,7 +46,7 @@ const FeaturesSection = () => {
             and create positive change together.
           </p>
         </div>
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Map className="text-white" size={25} />
           </div>
@@ -58,7 +58,7 @@ const FeaturesSection = () => {
             location to discover opportunities that matter to you.
           </p>
         </div>
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Leaf className="text-white" size={25} />
           </div>
@@ -70,7 +70,7 @@ const FeaturesSection = () => {
             conservation activities in your community.
           </p>
         </div>
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Gift className="text-white" size={25} />
           </div>
@@ -82,7 +82,7 @@ const FeaturesSection = () => {
             Make a direct impact on people's lives.
           </p>
         </div>
-        <div className="shadow p-5 rounded-lg space-y-2.5 bg-base-200 group transition">
+        <div className="shadow p-5 rounded-lg space-y-2.5 bg-boxbg group transition">
           <div className="bg-gradient-to-br from-primary to-secondary p-3 rounded-lg w-fit group-hover:scale-105 transition-transform duration-200">
             <Trash className="text-white" size={25} />
           </div>
