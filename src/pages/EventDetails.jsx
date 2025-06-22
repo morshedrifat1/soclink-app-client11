@@ -123,7 +123,7 @@ const EventDetails = () => {
                   <h1 className="text-base text-heading font-medium flex gap-1.5 items-center">
                     {eventDetails.organizerName}{" "}
                     <BadgeCheck
-                      size={20}
+                      size={16}
                       className="text-white bg-primary rounded-full"
                     />
                   </h1>

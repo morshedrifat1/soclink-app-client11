@@ -57,6 +57,7 @@ export const router = createBrowserRouter([
         element: (
             <EventDetails></EventDetails>
         ),
+        hydrateFallbackElement:<LoadingSpiner></LoadingSpiner>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API}/event-details/${params.id}`),
       },

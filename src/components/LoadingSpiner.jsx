@@ -12,7 +12,7 @@ const LoadingSpiner = () => {
   ]
 
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div className='h-screen flex justify-center items-center relative z-10'>
       <div className="relative w-16 h-16">
       {/* Central pulsing core */}
       <div className="absolute inset-0 flex items-center justify-center">
