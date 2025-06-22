@@ -9,13 +9,19 @@ import Register from "../pages/Register";
 import UpcomingEvents from "../pages/UpcomingEvents ";
 import PrivateRoute from "./PrivateRoute";
 import LoadingSpiner from "../components/LoadingSpiner";
+import EventDetails from "../pages/EventDetails";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
     children: [
-      { index: true, Component: Home,hydrateFallbackElement:<LoadingSpiner></LoadingSpiner>, loader: () => fetch("/galleryImg.json") },
+      {
+        index: true,
+        Component: Home,
+        hydrateFallbackElement: <LoadingSpiner></LoadingSpiner>,
+        loader: () => fetch("/galleryImg.json"),
+      },
       {
         path: "create-event",
         element: (
@@ -42,7 +48,18 @@ export const router = createBrowserRouter([
       },
       { path: "auth/login", Component: Login },
       { path: "auth/register", Component: Register },
-      { path: "upcoming-events", Component: UpcomingEvents },
+      {
+        path: "upcoming-events",
+        Component: UpcomingEvents,
+      },
+      {
+        path: "event-details/:id",
+        element: (
+            <EventDetails></EventDetails>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API}/event-details/${params.id}`),
+      },
     ],
   },
 ]);

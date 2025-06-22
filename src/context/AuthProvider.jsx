@@ -13,6 +13,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
+  const [token,setToken] = useState(null)
   const provider = new GoogleAuthProvider();
   const userSignUp = (email, password) => {
     setLoader(true);
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setLoader(false)
         setUser(currentUser);
+        setToken(currentUser?.accessToken)
       }
       else{
         setLoader(false)
@@ -53,7 +55,8 @@ const AuthProvider = ({ children }) => {
     userLogin,
     userSignout,
     googleSignin,
-    loader
+    loader,
+    token
   };
   return <AuthContext value={userAuth}>{children}</AuthContext>;
 };

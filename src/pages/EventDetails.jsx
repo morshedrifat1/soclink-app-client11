@@ -1,0 +1,210 @@
+import React from "react";
+import PageTitle from "../components/PageTitle";
+import { useLoaderData } from "react-router";
+import {
+  BadgeCheck,
+  Calendar,
+  CirclePlus,
+  Clock3,
+  MapPin,
+  User,
+  Users,
+} from "lucide-react";
+import {
+  BsFacebook,
+  BsInstagram,
+  BsLinkedin,
+  BsTwitterX,
+} from "react-icons/bs";
+import { Link } from "react-router";
+import { Fade } from "react-awesome-reveal";
+
+const EventDetails = () => {
+  const eventDetails = useLoaderData();
+  // event date fomating
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  // participants progress
+  const participante = 100; // actual value
+  const maxParticipants = eventDetails.capacity;
+  const percentage = (participante / maxParticipants) * 100;
+  return (
+    <div className="max-w-[1420px] mx-auto px-5">
+      <PageTitle
+        title={eventDetails.title}
+        subTitle={
+          "Join upcoming events near you and make a positive impact in your community."
+        }
+      ></PageTitle>
+
+      {/* event details section */}
+      <Fade>
+        <div className="max-w-[800px] mx-auto my-10 bg-boxbg shadow p-4 rounded-lg relative">
+          <img
+            src={eventDetails.thumbnailImageURL}
+            className="w-full h-50 sm:h-80 object-cover rounded-lg"
+            alt=""
+          />
+          <h1 className="text-heading text-2xl font-bold mt-3">
+            {eventDetails.title}
+          </h1>
+          <p className="text-base-300 text-base mt-3 leading-7">
+            {eventDetails.description}
+          </p>
+
+          {/* event details */}
+          <div className="grid grid-cols-1 sm:grid-cols-10 mt-4 gap-y-3 sm:gap-3">
+            <div className="col-span-6 border border-mainborder rounded-md p-3 bg-base-100">
+              <h1 className="flex items-center text-xl gap-2 text-heading font-semibold">
+                <Calendar size={20} />
+                Event Details
+              </h1>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6">
+                <div className="flex items-center gap-2">
+                  <Calendar size={18} />
+                  <div>
+                    <h1 className="text-base text-heading font-medium">Date</h1>
+                    <p className="text-sm text-base-content">
+                      {new Date(eventDetails.eventDate).toLocaleDateString(
+                        "en-US",
+                        options
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock3 size={18} />
+                  <div>
+                    <h1 className="text-base text-heading font-medium">Time</h1>
+                    <p className="text-sm text-base-content">
+                      {eventDetails.time}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin size={20} />
+                  <div>
+                    <h1 className="text-base text-heading font-medium">
+                      Location
+                    </h1>
+                    <p className="text-sm text-base-content">
+                      {eventDetails.location}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users size={18} />
+                  <div>
+                    <h1 className="text-base text-heading font-medium">
+                      Capacity
+                    </h1>
+                    <p className="text-sm text-base-content">
+                      {eventDetails.capacity} People
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* event organizer */}
+            <div className="border border-mainborder rounded-md p-3 bg-base-100 col-span-4">
+              <h1 className="flex items-center text-xl gap-2 text-heading font-semibold">
+                <User size={22} />
+                Event Organizer
+              </h1>
+              <div className="flex items-center flex-wrap gap-3 mt-5">
+                <div className="">
+                  <img
+                    src={eventDetails.organizerImg}
+                    className="w-9 h-9 outline-1 outline-offset-2 rounded-full object-cover"
+                    alt=""
+                  />
+                </div>
+                <div className="flex-auto">
+                  <h1 className="text-base text-heading font-medium flex gap-1.5 items-center">
+                    {eventDetails.organizerName}{" "}
+                    <BadgeCheck
+                      size={20}
+                      className="text-white bg-primary rounded-full"
+                    />
+                  </h1>
+                  <p className="text-sm text-base-content">
+                    {eventDetails.organizerEmail}
+                  </p>
+                </div>
+              </div>
+              {/* share event */}
+              <div className="mt-6">
+                <div className="flex gap-4">
+                  <Link
+                    className="bg-boxbg p-2 shadow shadow-subHeading rounded-lg"
+                    to={`https://www.facebook.com/`}
+                    target="_blank"
+                  >
+                    <BsFacebook
+                      className="text-[#0866ff]"
+                      size={22}
+                    ></BsFacebook>
+                  </Link>
+                  <Link
+                    className="bg-boxbg p-2 shadow shadow-subHeading rounded-lg"
+                    to={`https://x.com/`}
+                    target="_blank"
+                  >
+                    <BsTwitterX
+                      className="text-base-300"
+                      size={22}
+                    ></BsTwitterX>
+                  </Link>
+                  <Link
+                    className="bg-boxbg p-2 shadow shadow-subHeading rounded-lg"
+                    to={`https://www.instagram.com/`}
+                    target="_blank"
+                  >
+                    <BsInstagram
+                      className="text-[#c81b90]"
+                      size={22}
+                    ></BsInstagram>
+                  </Link>
+                  <Link
+                    className="bg-boxbg p-2 shadow shadow-subHeading rounded-lg"
+                    to={`https://www.linkedin.com/`}
+                    target="_blank"
+                  >
+                    <BsLinkedin
+                      className="text-[#0c61bf]"
+                      size={22}
+                    ></BsLinkedin>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            {/* event participants prograss */}
+            <div className="col-span-full bg-base-100 border rounded-lg border-mainborder p-3">
+              <div className="flex justify-between">
+                <h1 className="flex text-base text-heading gap-2"><Users size={18}></Users>Participants</h1>
+                <p className="text-sm text-base-content">10/{eventDetails.capacity}</p>
+              </div>
+              <div className="h-2 bg-gray-200 rounded-full overflow-hidden mt-2">
+              <div
+                className="h-full bg-gradient-to-r from-secondary to-primary"
+                style={{ width: `${percentage}%` }}
+              ></div>
+            </div>
+            </div>
+          </div>
+          <div>
+            <hr className="text-mainborder mt-5" />
+            <button className="bg-gradient-to-br from-primary to-secondary text-white w-full sm:w-50 py-2 rounded-md mt-4 mx-auto  hover:bg-gradient-to-bl cursor-pointer flex text-center justify-center items-center gap-2">
+              join Event <CirclePlus size={18} />
+            </button>
+          </div>
+          <span className="bg-gradient-to-r from-secondary to-primary text-white px-3 py-0.5 rounded-full text-sm absolute top-7 right-7">
+            {eventDetails.eventType}
+          </span>
+        </div>
+      </Fade>
+    </div>
+  );
+};
+
+export default EventDetails;
