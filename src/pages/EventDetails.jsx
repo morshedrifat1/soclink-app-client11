@@ -1,9 +1,10 @@
-import React from "react";
+import React, { use, useState } from "react";
 import PageTitle from "../components/PageTitle";
 import { useLoaderData } from "react-router";
 import {
   BadgeCheck,
   Calendar,
+  CircleAlert,
   CirclePlus,
   Clock3,
   MapPin,
@@ -18,15 +19,65 @@ import {
 } from "react-icons/bs";
 import { Link } from "react-router";
 import { Fade } from "react-awesome-reveal";
+import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+import { Slide, toast } from "react-toastify";
+import Modal from "../components/Modal";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const EventDetails = () => {
   const eventDetails = useLoaderData();
+  const { user } = use(AuthContext);
+  console.log(user);
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // participants progress
   const participante = 100; // actual value
   const maxParticipants = eventDetails.capacity;
   const percentage = (participante / maxParticipants) * 100;
+  const [modalContent, setModalContent] = useState({ title: "", message: "",button:'',buttonUrl:'',icon:"" });
+  // handle join event
+  const handleJoinEvent = () => {
+    const joinUserDetails = {
+      eventId: eventDetails._id,
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+    };
+    axios
+      .post(`${import.meta.env.VITE_API}/join-event`, joinUserDetails)
+      .then((res) => {
+        if (res?.data?.insertedId) {
+          setModalContent({
+            title: "Success",
+            message: "Thanks! You’ve successfully joined.",
+            button:'Explore Events',
+            buttonUrl:'/upcoming-events',
+            icon:<IoMdCheckmarkCircleOutline size={40}
+              className="mx-auto text-[#01a101]"></IoMdCheckmarkCircleOutline>
+          });
+          document.getElementById("my_modal_1").showModal();
+        }
+        if (res?.data?.alertMessage) {
+          setModalContent({
+            title: "Notice",
+            message: res.data.alertMessage,
+            button:'Another Events',
+            buttonUrl:'/upcoming-events',
+            icon:<CircleAlert  size={40}
+              className="mx-auto text-yellow-500"></CircleAlert>
+          });
+          document.getElementById("my_modal_1").showModal();
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message, {
+          autoClose: 3000,
+          hideProgressBar: true,
+          transition: Slide,
+        });
+      });
+  };
   return (
     <div className="max-w-[1420px] mx-auto px-5">
       <PageTitle
@@ -35,7 +86,6 @@ const EventDetails = () => {
           "Join upcoming events near you and make a positive impact in your community."
         }
       ></PageTitle>
-
       {/* event details section */}
       <Fade>
         <div className="max-w-[800px] mx-auto my-10 bg-boxbg shadow p-4 rounded-lg relative">
@@ -181,20 +231,27 @@ const EventDetails = () => {
             {/* event participants prograss */}
             <div className="col-span-full bg-base-100 border rounded-lg border-mainborder p-3">
               <div className="flex justify-between">
-                <h1 className="flex text-base text-heading gap-2"><Users size={18}></Users>Participants</h1>
-                <p className="text-sm text-base-content">10/{eventDetails.capacity}</p>
+                <h1 className="flex text-base text-heading gap-2">
+                  <Users size={18}></Users>Participants
+                </h1>
+                <p className="text-sm text-base-content">
+                  10/{eventDetails.capacity}
+                </p>
               </div>
               <div className="h-2 bg-gray-200 rounded-full overflow-hidden mt-2">
-              <div
-                className="h-full bg-gradient-to-r from-secondary to-primary"
-                style={{ width: `${percentage}%` }}
-              ></div>
-            </div>
+                <div
+                  className="h-full bg-gradient-to-r from-secondary to-primary"
+                  style={{ width: `${percentage}%` }}
+                ></div>
+              </div>
             </div>
           </div>
           <div>
             <hr className="text-mainborder mt-5" />
-            <button className="bg-gradient-to-br from-primary to-secondary text-white w-full sm:w-50 py-2 rounded-md mt-4 mx-auto  hover:bg-gradient-to-bl cursor-pointer flex text-center justify-center items-center gap-2">
+            <button
+              onClick={handleJoinEvent}
+              className="bg-gradient-to-br from-primary to-secondary text-white w-full sm:w-50 py-2 rounded-md mt-4 mx-auto  hover:bg-gradient-to-bl cursor-pointer flex text-center justify-center items-center gap-2"
+            >
               join Event <CirclePlus size={18} />
             </button>
           </div>
@@ -203,6 +260,8 @@ const EventDetails = () => {
           </span>
         </div>
       </Fade>
+      {/* modal popup */}
+        <Modal title={modalContent.title} message={modalContent.message} button={modalContent.button}buttonUrl={modalContent.buttonUrl} icon={modalContent.icon}></Modal>
     </div>
   );
 };

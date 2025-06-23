@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
       {
         path: "event-details/:id",
         element: (
-            <EventDetails></EventDetails>
+            <PrivateRoute><EventDetails></EventDetails></PrivateRoute>
         ),
         hydrateFallbackElement:<LoadingSpiner></LoadingSpiner>,
         loader: ({ params }) =>
