@@ -1,6 +1,4 @@
-import React, { use, useState } from "react";
-import PageTitle from "../components/PageTitle";
-import { useLoaderData } from "react-router";
+import axios from "axios";
 import {
   BadgeCheck,
   Calendar,
@@ -11,39 +9,64 @@ import {
   User,
   Users,
 } from "lucide-react";
+import { use, useState } from "react";
+import { Fade } from "react-awesome-reveal";
 import {
   BsFacebook,
   BsInstagram,
   BsLinkedin,
   BsTwitterX,
 } from "react-icons/bs";
-import { Link } from "react-router";
-import { Fade } from "react-awesome-reveal";
-import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { Link, useLoaderData } from "react-router";
 import { Slide, toast } from "react-toastify";
 import Modal from "../components/Modal";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { AuthContext } from "../context/AuthContext";
 
 const EventDetails = () => {
-  const eventDetails = useLoaderData();
+  const data = useLoaderData();
+  const [singleEvent, setSingleEvent] = useState(data);
   const { user } = use(AuthContext);
-  console.log(user);
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // participants progress
-  const participante = 100; // actual value
-  const maxParticipants = eventDetails.capacity;
+  const participante = singleEvent.joinedEvent;
+  const maxParticipants = singleEvent.capacity;
   const percentage = (participante / maxParticipants) * 100;
-  const [modalContent, setModalContent] = useState({ title: "", message: "",button:'',buttonUrl:'',icon:"" });
+  const [modalContent, setModalContent] = useState({
+    title: "",
+    message: "",
+    button: "",
+    buttonUrl: "",
+    icon: "",
+  });
   // handle join event
   const handleJoinEvent = () => {
     const joinUserDetails = {
-      eventId: eventDetails._id,
+      eventId: singleEvent._id,
       name: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
     };
+
+    // sit fillup aleart
+    if (singleEvent.joinedEvent >= singleEvent.capacity) {
+      setModalContent({
+        title: "Notice",
+        message: "Maximum Capacity Reached",
+        button: "Another Events",
+        buttonUrl: "/upcoming-events",
+        icon: (
+          <CircleAlert
+            size={40}
+            className="mx-auto text-yellow-500"
+          ></CircleAlert>
+        ),
+      });
+      document.getElementById("my_modal_1").showModal();
+      return;
+    }
+    // join req and joined user data post
     axios
       .post(`${import.meta.env.VITE_API}/join-event`, joinUserDetails)
       .then((res) => {
@@ -51,21 +74,40 @@ const EventDetails = () => {
           setModalContent({
             title: "Success",
             message: "Thanks! You’ve successfully joined.",
-            button:'Explore Events',
-            buttonUrl:'/upcoming-events',
-            icon:<IoMdCheckmarkCircleOutline size={40}
-              className="mx-auto text-[#01a101]"></IoMdCheckmarkCircleOutline>
+            button: "Explore Events",
+            buttonUrl: "/upcoming-events",
+            icon: (
+              <IoMdCheckmarkCircleOutline
+                size={40}
+                className="mx-auto text-[#01a101]"
+              ></IoMdCheckmarkCircleOutline>
+            ),
           });
           document.getElementById("my_modal_1").showModal();
+          // jouned user count increment
+          const newData = {
+            ...singleEvent,
+            joinedEvent: singleEvent.joinedEvent + 1,
+          };
+          setSingleEvent(newData);
+          // joined user count update database
+          axios.patch(`${import.meta.env.VITE_API}/join-user-update`, {
+            eventId: newData._id,
+            joinedUser: newData.joinedEvent,
+          });
         }
         if (res?.data?.alertMessage) {
           setModalContent({
             title: "Notice",
             message: res.data.alertMessage,
-            button:'Another Events',
-            buttonUrl:'/upcoming-events',
-            icon:<CircleAlert  size={40}
-              className="mx-auto text-yellow-500"></CircleAlert>
+            button: "Another Events",
+            buttonUrl: "/upcoming-events",
+            icon: (
+              <CircleAlert
+                size={40}
+                className="mx-auto text-yellow-500"
+              ></CircleAlert>
+            ),
           });
           document.getElementById("my_modal_1").showModal();
         }
@@ -80,25 +122,19 @@ const EventDetails = () => {
   };
   return (
     <div className="max-w-[1420px] mx-auto px-5">
-      <PageTitle
-        title={eventDetails.title}
-        subTitle={
-          "Join upcoming events near you and make a positive impact in your community."
-        }
-      ></PageTitle>
       {/* event details section */}
       <Fade>
         <div className="max-w-[800px] mx-auto my-10 bg-boxbg shadow p-4 rounded-lg relative">
           <img
-            src={eventDetails.thumbnailImageURL}
+            src={singleEvent.thumbnailImageURL}
             className="w-full h-50 sm:h-80 object-cover rounded-lg"
             alt=""
           />
           <h1 className="text-heading text-2xl font-bold mt-3">
-            {eventDetails.title}
+            {singleEvent.title}
           </h1>
           <p className="text-base-300 text-base mt-3 leading-7">
-            {eventDetails.description}
+            {singleEvent.description}
           </p>
 
           {/* event details */}
@@ -114,7 +150,7 @@ const EventDetails = () => {
                   <div>
                     <h1 className="text-base text-heading font-medium">Date</h1>
                     <p className="text-sm text-base-content">
-                      {new Date(eventDetails.eventDate).toLocaleDateString(
+                      {new Date(singleEvent.eventDate).toLocaleDateString(
                         "en-US",
                         options
                       )}
@@ -126,7 +162,7 @@ const EventDetails = () => {
                   <div>
                     <h1 className="text-base text-heading font-medium">Time</h1>
                     <p className="text-sm text-base-content">
-                      {eventDetails.time}
+                      {singleEvent.time}
                     </p>
                   </div>
                 </div>
@@ -137,7 +173,7 @@ const EventDetails = () => {
                       Location
                     </h1>
                     <p className="text-sm text-base-content">
-                      {eventDetails.location}
+                      {singleEvent.location}
                     </p>
                   </div>
                 </div>
@@ -148,7 +184,7 @@ const EventDetails = () => {
                       Capacity
                     </h1>
                     <p className="text-sm text-base-content">
-                      {eventDetails.capacity} People
+                      {singleEvent.capacity} People
                     </p>
                   </div>
                 </div>
@@ -164,21 +200,21 @@ const EventDetails = () => {
               <div className="flex items-center flex-wrap gap-3 mt-5">
                 <div className="">
                   <img
-                    src={eventDetails.organizerImg}
+                    src={singleEvent.organizerImg}
                     className="w-9 h-9 outline-1 outline-offset-2 rounded-full object-cover"
                     alt=""
                   />
                 </div>
                 <div className="flex-auto">
                   <h1 className="text-base text-heading font-medium flex gap-1.5 items-center">
-                    {eventDetails.organizerName}{" "}
+                    {singleEvent.organizerName}{" "}
                     <BadgeCheck
                       size={16}
                       className="text-white bg-primary rounded-full"
                     />
                   </h1>
                   <p className="text-sm text-base-content">
-                    {eventDetails.organizerEmail}
+                    {singleEvent.organizerEmail}
                   </p>
                 </div>
               </div>
@@ -235,7 +271,7 @@ const EventDetails = () => {
                   <Users size={18}></Users>Participants
                 </h1>
                 <p className="text-sm text-base-content">
-                  10/{eventDetails.capacity}
+                  {participante}/{maxParticipants}
                 </p>
               </div>
               <div className="h-2 bg-gray-200 rounded-full overflow-hidden mt-2">
@@ -256,12 +292,18 @@ const EventDetails = () => {
             </button>
           </div>
           <span className="bg-gradient-to-r from-secondary to-primary text-white px-3 py-0.5 rounded-full text-sm absolute top-7 right-7">
-            {eventDetails.eventType}
+            {singleEvent.eventType}
           </span>
         </div>
       </Fade>
       {/* modal popup */}
-        <Modal title={modalContent.title} message={modalContent.message} button={modalContent.button}buttonUrl={modalContent.buttonUrl} icon={modalContent.icon}></Modal>
+      <Modal
+        title={modalContent.title}
+        message={modalContent.message}
+        button={modalContent.button}
+        buttonUrl={modalContent.buttonUrl}
+        icon={modalContent.icon}
+      ></Modal>
     </div>
   );
 };

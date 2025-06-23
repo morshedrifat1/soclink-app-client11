@@ -131,7 +131,7 @@ const UpcomingEvents = () => {
                       </span>
                     </h3>
                     <h3 className="flex gap-1.5 items-center text-base text-base-content">
-                      <Users size={19}></Users>247 people joined
+                      <Users size={19}></Users>{event.joinedEvent} people joined
                     </h3>
                     <Link
                       to={`/event-details/${event._id}`}
