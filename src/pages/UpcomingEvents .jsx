@@ -43,6 +43,7 @@ const UpcomingEvents = () => {
       setLoader(false)
     });
   }, [searchAPi]);
+  console.log(UpcomingEvents);
   return (
     <>
       {loader ? (

@@ -187,7 +187,7 @@ const Header = () => {
               </div>
             )}
             <div
-              className={`absolute top-20  p-3 bg-base-200 shadow rounded-lg dropdown-content z-[1] w-auto whitespace-nowrap`}
+              className={`absolute top-20  p-3 shadow rounded-lg dropdown-content z-[1] w-auto whitespace-nowrap bg-boxbg`}
             >
               {navLinkDropdown}
             </div>

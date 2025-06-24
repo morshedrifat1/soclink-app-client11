@@ -47,6 +47,7 @@ const EventDetails = () => {
       name: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
+      eventDate:singleEvent.eventDate
     };
 
     // sit fillup aleart
@@ -68,7 +69,7 @@ const EventDetails = () => {
     }
     // join req and joined user data post
     axios
-      .post(`${import.meta.env.VITE_API}/join-event`, joinUserDetails)
+      .post(`${import.meta.env.VITE_API}/join-event-req`, joinUserDetails)
       .then((res) => {
         if (res?.data?.insertedId) {
           setModalContent({
@@ -90,11 +91,6 @@ const EventDetails = () => {
             joinedEvent: singleEvent.joinedEvent + 1,
           };
           setSingleEvent(newData);
-          // joined user count update database
-          axios.patch(`${import.meta.env.VITE_API}/join-user-update`, {
-            eventId: newData._id,
-            joinedUser: newData.joinedEvent,
-          });
         }
         if (res?.data?.alertMessage) {
           setModalContent({
