@@ -4,12 +4,11 @@ import {
   Calendar,
   CircleAlert,
   CirclePlus,
-  Clock3,
   MapPin,
   User,
   Users,
 } from "lucide-react";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import {
   BsFacebook,
@@ -18,15 +17,14 @@ import {
   BsTwitterX,
 } from "react-icons/bs";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { Link, useLoaderData } from "react-router";
+import { Link, useParams} from "react-router";
 import { Slide, toast } from "react-toastify";
 import Modal from "../components/Modal";
 import { AuthContext } from "../context/AuthContext";
 
 const EventDetails = () => {
-  const data = useLoaderData();
-  const [singleEvent, setSingleEvent] = useState(data);
-  const { user } = use(AuthContext);
+  const [singleEvent, setSingleEvent] = useState({});
+  const { user,token } = use(AuthContext);
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // participants progress
@@ -40,6 +38,20 @@ const EventDetails = () => {
     buttonUrl: "",
     icon: "",
   });
+  const params = useParams()
+
+  // event details data load
+    useEffect(()=>{
+      axios.get(`${import.meta.env.VITE_API}/event-details/${params.id}`,{
+        headers: {
+          authorization: `Bearer ${token}`,
+          email: user.email,
+        },
+      })
+      .then((res)=>{
+        setSingleEvent(res.data)
+      })
+    },[params,token,user.email])
   // handle join event
   const handleJoinEvent = () => {
     const joinUserDetails = {
@@ -154,11 +166,11 @@ const EventDetails = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock3 size={18} />
+                  <Users size={18} />
                   <div>
-                    <h1 className="text-base text-heading font-medium">Time</h1>
+                    <h1 className="text-base text-heading font-medium">Joined</h1>
                     <p className="text-sm text-base-content">
-                      {singleEvent.time}
+                      {participante}
                     </p>
                   </div>
                 </div>

@@ -38,6 +38,70 @@ const Header = () => {
       </li>
     </>
   );
+  const mobileNavlink = (
+    <>
+      <li className="text-base font-medium ">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:text-navlink p-1 "
+          }
+          to={"/"}
+        >
+          Home
+        </NavLink>
+      </li>
+      <li className="text-base font-medium">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:text-navlink p-1"
+          }
+          to={"/upcoming-events"}
+        >
+          Upcoming Events
+        </NavLink>
+      </li>
+      <li className="text-base font-medium">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:text-navlink p-1"
+          }
+          to={"/create-event"}
+        >
+          Create event
+        </NavLink>
+      </li>
+      <li className="text-base font-medium">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:text-navlink p-1"
+          }
+          to={"/join-event"}
+        >
+          Join Event
+        </NavLink>
+      </li>
+      <li className="text-base font-medium">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:text-navlink p-1"
+          }
+          to={"/manage-events"}
+        >
+          Manage Events
+        </NavLink>
+      </li>
+    </>
+  );
 
   const navLinkDropdown = (
     <ul className="z-1 space-y-2">
@@ -140,7 +204,7 @@ const Header = () => {
                   </NavLink>
                 </div>
               </li>
-              {navLink}
+              {mobileNavlink}
               <li>
                 {user ? (
                   <button

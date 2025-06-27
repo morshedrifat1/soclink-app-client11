@@ -125,11 +125,7 @@ const UpcomingEvents = () => {
                       {new Date(event.eventDate).toLocaleDateString(
                         "en-US",
                         options
-                      )}{" "}
-                      •
-                      <span className="bg-mainborder px-2 rounded-full text-sm border border-gray-50/10">
-                        {event.time}
-                      </span>
+                      )}
                     </h3>
                     <h3 className="flex gap-1.5 items-center text-base text-base-content">
                       <Users size={19}></Users>{event.joinedEvent} people joined
