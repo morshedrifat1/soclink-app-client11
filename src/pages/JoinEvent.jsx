@@ -9,7 +9,7 @@ import LoadingSpiner from "../components/LoadingSpiner";
 import NoDataFound from "../components/NoDataFound";
 
 const JoinEvent = () => {
-  const { user } = use(AuthContext);
+  const { user, token } = use(AuthContext);
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(true);
   const handleCancel = (id) => {
@@ -23,9 +23,13 @@ const JoinEvent = () => {
       confirmButtonText: "Yes, Cancel Event!",
     }).then((result) => {
       if (result.isConfirmed) {
-        setEventData(eventData.filter((data) => data._id !== id));
         axios
-          .delete(`${import.meta.env.VITE_API}/event-cencel/${id}`)
+          .delete(`${import.meta.env.VITE_API}/event-cencel/${id}`, {
+            headers: {
+              authorization: `Bearer ${token}`,
+              email: user.email,
+            },
+          })
           .then((res) => {
             if (res.data.deletedCount) {
               Swal.fire({
@@ -34,13 +38,19 @@ const JoinEvent = () => {
                 icon: "success",
               });
             }
+            setEventData(eventData.filter((data) => data._id !== id));
           });
       }
     });
   };
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API}/join-event?email=${user.email}`)
+      .get(`${import.meta.env.VITE_API}/join-event?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+          email: user.email
+        }
+      })
       .then((res) => {
         setEventData(res.data);
         setLoading(false);
@@ -48,7 +58,7 @@ const JoinEvent = () => {
       .catch((error) => {
         console.log(error.message);
       });
-  }, [user.email]);
+  }, [user.email,token]);
   return (
     <>
       {loading ? (
@@ -86,9 +96,6 @@ const JoinEvent = () => {
                     Event Date
                   </th>
                   <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Event Time
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
                     Details
                   </th>
                   <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
@@ -111,9 +118,6 @@ const JoinEvent = () => {
                     </td>
                     <td className="text-base-content whitespace-nowrap">
                       {event.eventDate}
-                    </td>
-                    <td className="text-base-content whitespace-nowrap">
-                      {event.time}
                     </td>
                     <td className="text-heading whitespace-nowrap">
                       <Link to={`/event-details/${event.eventId}`}>

@@ -17,14 +17,14 @@ import {
   BsTwitterX,
 } from "react-icons/bs";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { Link, useParams} from "react-router";
+import { Link, useParams } from "react-router";
 import { Slide, toast } from "react-toastify";
 import Modal from "../components/Modal";
 import { AuthContext } from "../context/AuthContext";
 
 const EventDetails = () => {
   const [singleEvent, setSingleEvent] = useState({});
-  const { user,token } = use(AuthContext);
+  const { user, token } = use(AuthContext);
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // participants progress
@@ -38,20 +38,21 @@ const EventDetails = () => {
     buttonUrl: "",
     icon: "",
   });
-  const params = useParams()
+  const params = useParams();
 
   // event details data load
-    useEffect(()=>{
-      axios.get(`${import.meta.env.VITE_API}/event-details/${params.id}`,{
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API}/event-details/${params.id}`, {
         headers: {
           authorization: `Bearer ${token}`,
           email: user.email,
         },
       })
-      .then((res)=>{
-        setSingleEvent(res.data)
-      })
-    },[params,token,user.email])
+      .then((res) => {
+        setSingleEvent(res.data);
+      });
+  }, [params, token, user.email]);
   // handle join event
   const handleJoinEvent = () => {
     const joinUserDetails = {
@@ -59,7 +60,7 @@ const EventDetails = () => {
       name: user.displayName,
       email: user.email,
       photoURL: user.photoURL,
-      eventDate:singleEvent.eventDate
+      eventDate: singleEvent.eventDate,
     };
 
     // sit fillup aleart
@@ -81,7 +82,12 @@ const EventDetails = () => {
     }
     // join req and joined user data post
     axios
-      .post(`${import.meta.env.VITE_API}/join-event-req`, joinUserDetails)
+      .post(`${import.meta.env.VITE_API}/join-event-req`, joinUserDetails, {
+        headers: {
+          authorization: `Bearer ${token}`,
+          email: user.email,
+        },
+      })
       .then((res) => {
         if (res?.data?.insertedId) {
           setModalContent({
@@ -168,10 +174,10 @@ const EventDetails = () => {
                 <div className="flex items-center gap-2">
                   <Users size={18} />
                   <div>
-                    <h1 className="text-base text-heading font-medium">Joined</h1>
-                    <p className="text-sm text-base-content">
-                      {participante}
-                    </p>
+                    <h1 className="text-base text-heading font-medium">
+                      Joined
+                    </h1>
+                    <p className="text-sm text-base-content">{participante}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">

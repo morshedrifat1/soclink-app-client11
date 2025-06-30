@@ -10,6 +10,7 @@ import UpcomingEvents from "../pages/UpcomingEvents ";
 import PrivateRoute from "./PrivateRoute";
 import LoadingSpiner from "../components/LoadingSpiner";
 import EventDetails from "../pages/EventDetails";
+import EditEvent from "../pages/EditEvent";
 
 export const router = createBrowserRouter([
   {
@@ -55,8 +56,18 @@ export const router = createBrowserRouter([
       {
         path: "event-details/:id",
         element: (
-            <PrivateRoute><EventDetails></EventDetails></PrivateRoute>
-        )
+          <PrivateRoute>
+            <EventDetails></EventDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "edit-event/:id",
+        element: (
+          <PrivateRoute>
+            <EditEvent></EditEvent>
+          </PrivateRoute>
+        ),
       },
     ],
   },
