@@ -22,6 +22,7 @@ const CreateEvent = () => {
   const { user, token } = use(AuthContext);
   const [startDate, setStartDate] = useState("");
   const userImg = user.photoURL;
+  
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",

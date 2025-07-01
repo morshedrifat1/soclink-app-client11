@@ -24,6 +24,7 @@ const EditEvent = () => {
   const [eventData, setEventData] = useState({});
   const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState();
+  const userImg = user.photoURL;
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",
@@ -42,6 +43,7 @@ const EditEvent = () => {
     const data = Object.fromEntries(formData.entries());
     const eventDetails = {
       ...data,
+      organizerImg:userImg,
       eventDate: startDate,
     };
     console.log(id);

@@ -31,6 +31,7 @@ const EventDetails = () => {
   const participante = singleEvent.joinedEvent;
   const maxParticipants = singleEvent.capacity;
   const percentage = (participante / maxParticipants) * 100;
+  console.log(singleEvent);
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",

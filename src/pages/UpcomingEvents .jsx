@@ -11,6 +11,7 @@ const UpcomingEvents = () => {
   const [searchAPi, setSearchAPi] = useState(`${API}/upcoming-event`);
   const [loader, setLoader] = useState(true);
   const search = useRef();
+  console.log(UpcomingEvents);
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // handle for only search field
