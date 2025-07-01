@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import LoadingSpiner from "../components/LoadingSpiner";
 import NoDataFound from "../components/NoDataFound";
 
-const JoinEvent = () => {
+const JoinedEvent = () => {
   const { user, token } = use(AuthContext);
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -145,4 +145,4 @@ const JoinEvent = () => {
   );
 };
 
-export default JoinEvent;
+export default JoinedEvent;

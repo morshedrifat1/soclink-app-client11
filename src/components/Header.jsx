@@ -122,23 +122,23 @@ const Header = () => {
           className={({ isActive }) =>
             isActive
               ? " p-1 text-navlink"
-              : "hover:border-b-2 p-1 border-base-300"
-          }
-          to={"/join-event"}
-        >
-          Join Event
-        </NavLink>
-      </li>
-      <li className="text-base font-medium">
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
               : "hover:border-b-2 p-1 border-base-300 "
           }
           to={"/manage-events"}
         >
           Manage Events
+        </NavLink>
+      </li>
+            <li className="text-base font-medium">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? " p-1 text-navlink"
+              : "hover:border-b-2 p-1 border-base-300"
+          }
+          to={"/join-event"}
+        >
+          Joined Event
         </NavLink>
       </li>
     </ul>

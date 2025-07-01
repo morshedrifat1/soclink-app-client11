@@ -3,6 +3,7 @@ import HeroSection from "./HeroSection";
 import FeaturesSection from "./FeaturesSection";
 import EventGallery from "./EventGallery";
 import { useLoaderData } from "react-router";
+import Newsletter from "../../components/Newsletter";
 
 const Home = () => {
     const galleryImg = useLoaderData()
@@ -11,6 +12,7 @@ const Home = () => {
             <HeroSection></HeroSection>
             <FeaturesSection></FeaturesSection>
             <EventGallery galleryImg={galleryImg}></EventGallery>
+            <Newsletter></Newsletter>
     </div>
     );
 };

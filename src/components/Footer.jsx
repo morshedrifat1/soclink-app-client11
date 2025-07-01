@@ -64,7 +64,7 @@ const Footer = () => {
           <hr className="text-base-content" />
           <p className="text-center pt-5">
             Copyright © {new Date().getFullYear()} - All right reserved by
-            Plantly Ltd
+            SocLink Ltd
           </p>
         </div>
       </div>

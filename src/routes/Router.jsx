@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import CreateEvent from "../pages/CreateEvent";
-import JoinEvent from "../pages/JoinEvent";
+import JoinedEvent from "../pages/JoinedEvent";
 import ManageEvents from "../pages/ManageEvents";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -11,10 +11,12 @@ import PrivateRoute from "./PrivateRoute";
 import LoadingSpiner from "../components/LoadingSpiner";
 import EventDetails from "../pages/EventDetails";
 import EditEvent from "../pages/EditEvent";
+import Error404 from "../pages/Error404";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    errorElement:<Error404></Error404>,
     Component: MainLayout,
     children: [
       {
@@ -35,7 +37,7 @@ export const router = createBrowserRouter([
         path: "join-event",
         element: (
           <PrivateRoute>
-            <JoinEvent></JoinEvent>
+            <JoinedEvent></JoinedEvent>
           </PrivateRoute>
         ),
       },
