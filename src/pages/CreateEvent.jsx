@@ -108,6 +108,7 @@ const CreateEvent = () => {
                 >
                   <option value="">Select event type</option>
                   <option value="Cleanup">Cleanup</option>
+                  <option value="Awareness">Awareness</option>
                   <option value="Plantation">Plantation</option>
                   <option value="Donation">Donation</option>
                 </select>
@@ -156,6 +157,7 @@ const CreateEvent = () => {
                   <DatePicker
                     required
                     selected={startDate}
+                    minDate={new Date()}
                     onChange={(date) =>
                       setStartDate(date.toISOString().slice(0, 10))
                     }

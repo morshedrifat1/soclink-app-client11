@@ -186,6 +186,7 @@ const EditEvent = () => {
                       <DatePicker
                         required
                         selected={startDate}
+                        minDate={new Date()}
                         onChange={(date) =>
                           setStartDate(date.toISOString().slice(0, 10))
                         }
