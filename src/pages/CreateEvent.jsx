@@ -2,7 +2,6 @@ import React, { use, useState } from "react";
 import PageTitle from "../components/PageTitle";
 import {
   Calendar,
-  Clock,
   FileText,
   Image,
   ListCheck,
@@ -18,11 +17,12 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import Modal from "../components/Modal";
+import {useNavigate } from "react-router";
 const CreateEvent = () => {
   const { user, token } = use(AuthContext);
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState("");
   const userImg = user.photoURL;
-  
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",
@@ -62,9 +62,15 @@ const CreateEvent = () => {
               ></IoMdCheckmarkCircleOutline>
             ),
           });
+          // popup call
           document.getElementById("my_modal_1").showModal();
           form.reset();
-          setStartDate("")
+          setStartDate("");
+
+          // redirect upcoming event page after 5s 
+          setTimeout(() => {
+            navigate("/upcoming-events"); // যেই পেইজে যেতে চাও
+          }, 5000);
         }
       });
   };
@@ -179,6 +185,7 @@ const CreateEvent = () => {
                   type="number"
                   name="capacity"
                   placeholder="e.g. 1000"
+                  min={1}
                   className="pl-10 border-2 border-mainborder w-full bg-base-100 p-2 rounded-lg text-sm text-base-content focus:outline focus:outline-offset-2 focus:outline-border-outline"
                 />
                 <Users

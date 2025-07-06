@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import { Eye, SquarePen, X } from "lucide-react";
 import LoadingSpiner from "../components/LoadingSpiner";
 import { Fade } from "react-awesome-reveal";
+import NoDataFound from "../components/NoDataFound";
 
 const ManageEvents = () => {
   const [eventData, setEventData] = useState([]);
@@ -62,6 +63,11 @@ const ManageEvents = () => {
     <>
       {loading ? (
         <LoadingSpiner></LoadingSpiner>
+      ) : eventData.length === 0 ? (
+        <NoDataFound
+          title={"No Data Found"}
+          description={"Looks like you haven’t Create any events."}
+        ></NoDataFound>
       ) : (
         <div className="max-w-[1420px] mx-auto px-5">
           <PageTitle
@@ -73,76 +79,76 @@ const ManageEvents = () => {
           {/* event table */}
           <Fade>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-boxbg my-10">
-            <table className="table ">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    No
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Title
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Category
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Event Date
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Details
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Edit Event
-                  </th>
-                  <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
-                    Delete Event
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                {eventData?.map((event, index) => (
-                  <tr key={index}>
-                    <th className="text-base-content whitespace-nowrap">
-                      {index + 1}
+              <table className="table ">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      No
                     </th>
-                    <td className="text-base-content whitespace-nowrap">
-                      {event.title}
-                    </td>
-                    <td className="text-base-content whitespace-nowrap">
-                      {event.eventType}
-                    </td>
-                    <td className="text-base-content whitespace-nowrap">
-                      {event.eventDate}
-                    </td>
-                    <td className="text-heading whitespace-nowrap">
-                      <Link to={`/event-details/${event._id}`}>
-                        <button className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer">
-                          <Eye size={20} />
-                        </button>
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/edit-event/${event._id}`}>
-                        <button className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer">
-                          <SquarePen size={20}></SquarePen>
-                        </button>
-                      </Link>
-                    </td>
-                    <td className="text-heading whitespace-nowrap">
-                      <button
-                        onClick={() => handleDelete(event._id)}
-                        className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer"
-                      >
-                        <X size={20} />
-                      </button>
-                    </td>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Title
+                    </th>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Category
+                    </th>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Event Date
+                    </th>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Details
+                    </th>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Edit Event
+                    </th>
+                    <th className="bg-boxbg text-heading text-sm whitespace-nowrap">
+                      Delete Event
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {eventData?.map((event, index) => (
+                    <tr key={index}>
+                      <th className="text-base-content whitespace-nowrap">
+                        {index + 1}
+                      </th>
+                      <td className="text-base-content whitespace-nowrap">
+                        {event.title}
+                      </td>
+                      <td className="text-base-content whitespace-nowrap">
+                        {event.eventType}
+                      </td>
+                      <td className="text-base-content whitespace-nowrap">
+                        {event.eventDate}
+                      </td>
+                      <td className="text-heading whitespace-nowrap">
+                        <Link to={`/event-details/${event._id}`}>
+                          <button className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer">
+                            <Eye size={20} />
+                          </button>
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/edit-event/${event._id}`}>
+                          <button className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer">
+                            <SquarePen size={20}></SquarePen>
+                          </button>
+                        </Link>
+                      </td>
+                      <td className="text-heading whitespace-nowrap">
+                        <button
+                          onClick={() => handleDelete(event._id)}
+                          className="bg-boxbg shadow-md shadow-subHeading p-2.5 rounded-xl cursor-pointer"
+                        >
+                          <X size={20} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </Fade>
         </div>
       )}

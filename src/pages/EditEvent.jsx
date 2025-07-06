@@ -59,8 +59,8 @@ const EditEvent = () => {
           setModalContent({
             title: "Success",
             message: "🎉 Your event has been successfully Update!",
-            button: "Manage Events",
-            buttonUrl: "/manage-events",
+            button: "View Events",
+            buttonUrl: `/event-details/${id}`,
             icon: (
               <IoMdCheckmarkCircleOutline
                 size={40}
@@ -208,6 +208,7 @@ const EditEvent = () => {
                       defaultValue={eventData.capacity}
                       type="number"
                       name="capacity"
+                      min={1}
                       placeholder="e.g. 1000"
                       className="pl-10 border-2 border-mainborder w-full bg-base-100 p-2 rounded-lg text-sm text-base-content focus:outline focus:outline-offset-2 focus:outline-border-outline"
                     />
