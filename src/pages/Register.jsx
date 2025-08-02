@@ -212,7 +212,7 @@ const Register = () => {
               <input
                 type={seePasswor ? "text" : "password"}
                 name="password"
-                placeholder="Enter Your Email"
+                placeholder="Enter A Password"
                 className="pl-10 border-2 border-mainborder w-full bg-base-100 p-2 rounded-lg text-sm text-base-content focus:outline focus:outline-offset-2 focus:outline-border-outline"
               />
               <GoLock
