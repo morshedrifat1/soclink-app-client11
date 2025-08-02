@@ -57,7 +57,7 @@
 }
 
 
-/* loading spiner animation css */
+/* loading spiner animation css  */
 @layer utilities {
   .animate-spin-slow {
     animation: spin 8s linear infinite;
