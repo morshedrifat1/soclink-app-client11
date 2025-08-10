@@ -4,7 +4,7 @@ import { Fade } from "react-awesome-reveal";
 
 const FeaturesSection = () => {
   return (
-    <div className="max-w-[1420px] mx-auto py-20 px-5">
+    <div id="features" className="max-w-[1420px] mx-auto py-20 px-5">
       <Fade>
         <div className="space-y-3">
           <p className="text-center text-sm font-semibold border border-secondary rounded-full w-fit mx-auto px-5 bg-subHeading text-heading">

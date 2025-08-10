@@ -4,6 +4,7 @@ import FeaturesSection from "./FeaturesSection";
 import EventGallery from "./EventGallery";
 import { useLoaderData } from "react-router";
 import Newsletter from "../../components/Newsletter";
+import LatestEvent from "./LatestEvent";
 
 const Home = () => {
     const galleryImg = useLoaderData()
@@ -11,6 +12,7 @@ const Home = () => {
         <div className="bg-base-100">
             <HeroSection></HeroSection>
             <FeaturesSection></FeaturesSection>
+            <LatestEvent></LatestEvent>
             <EventGallery galleryImg={galleryImg}></EventGallery>
             <Newsletter></Newsletter>
     </div>

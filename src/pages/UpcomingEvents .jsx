@@ -2,18 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import PageTitle from "../components/PageTitle";
 import { Calendar, Filter, MapPin, Search, Users } from "lucide-react";
 import axios from "axios";
-import { Link } from "react-router";
 import { Fade } from "react-awesome-reveal";
 import LoadingSpiner from "../components/LoadingSpiner";
+import EventCards from "./UpcomingEvent/EventCards";
 const UpcomingEvents = () => {
   const API = import.meta.env.VITE_API;
-  const [UpcomingEvents, setUpcomingEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   const [searchAPi, setSearchAPi] = useState(`${API}/upcoming-event`);
   const [loader, setLoader] = useState(true);
   const search = useRef();
-  console.log(UpcomingEvents);
-  // event date fomating
-  const options = { year: "numeric", month: "long", day: "numeric" };
   // handle for only search field
   const handleSearch = () => {
     if (search) {
@@ -40,11 +37,10 @@ const UpcomingEvents = () => {
   };
   useEffect(() => {
     axios.get(searchAPi).then((res) => {
-      setUpcomingEvents(res.data);
+      setEvents(res.data);
       setLoader(false)
     });
   }, [searchAPi]);
-  console.log(UpcomingEvents);
   return (
     <>
       {loader ? (
@@ -105,45 +101,7 @@ const UpcomingEvents = () => {
 
           {/* event card */}
           <Fade>
-            <div className="grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-10">
-              {UpcomingEvents.map((event) => (
-                <div className="bg-boxbg shadow rounded-lg relative group overflow-hidden">
-                  <img
-                    src={event.thumbnailImageURL}
-                    alt=""
-                    className="rounded-t-lg h-50 w-full object-cover group-hover:scale-[1.03] duration-700 transition-transform"
-                  />
-                  <div className="p-4 space-y-2.5">
-                    <h1 className="text-heading text-xl font-bold">
-                      {event.title}
-                    </h1>
-                    <h3 className="flex gap-1.5 items-center text-base text-base-content">
-                      <MapPin size={19}></MapPin>{" "}
-                      {event.location.split(" ").slice(0, 3).join(" ")}...
-                    </h3>
-                    <h3 className="flex gap-1.5 items-center text-base text-base-content">
-                      <Calendar size={19}></Calendar>
-                      {new Date(event.eventDate).toLocaleDateString(
-                        "en-US",
-                        options
-                      )}
-                    </h3>
-                    <h3 className="flex gap-1.5 items-center text-base text-base-content">
-                      <Users size={19}></Users>{event.joinedEvent} people joined
-                    </h3>
-                    <Link
-                      to={`/event-details/${event._id}`}
-                      className="bg-gradient-to-br from-primary to-secondary rounded-lg w-full block text-center text-white text-base py-2 mt-3 cursor-pointer"
-                    >
-                      View Event
-                    </Link>
-                  </div>
-                  <span className="bg-gradient-to-r from-secondary to-primary text-white px-3 py-0.5 rounded-full text-sm absolute top-2.5 left-2.5">
-                    {event.eventType}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <EventCards events={events}></EventCards>
           </Fade>
         </div>
       )}

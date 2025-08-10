@@ -6,6 +6,7 @@ import userImg from "../assets/user.png";
 import darkLogo from "../assets/dark-logo.png";
 import { AuthContext } from "../context/AuthContext";
 import { Slide, toast } from "react-toastify";
+import { HashLink } from "react-router-hash-link";
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -36,6 +37,11 @@ const Header = () => {
           Upcoming Events
         </NavLink>
       </li>
+      <li className="text-base font-medium">
+        <HashLink className="text-navlink" smooth to="/#features">
+          Features
+        </HashLink>
+      </li>
     </>
   );
   const mobileNavlink = (
@@ -43,9 +49,7 @@ const Header = () => {
       <li className="text-base font-medium ">
         <NavLink
           className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
-              : "hover:text-navlink p-1 "
+            isActive ? " p-1 text-navlink" : "hover:text-navlink p-1 "
           }
           to={"/"}
         >
@@ -55,9 +59,7 @@ const Header = () => {
       <li className="text-base font-medium">
         <NavLink
           className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
-              : "hover:text-navlink p-1"
+            isActive ? " p-1 text-navlink" : "hover:text-navlink p-1"
           }
           to={"/upcoming-events"}
         >
@@ -67,9 +69,7 @@ const Header = () => {
       <li className="text-base font-medium">
         <NavLink
           className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
-              : "hover:text-navlink p-1"
+            isActive ? " p-1 text-navlink" : "hover:text-navlink p-1"
           }
           to={"/create-event"}
         >
@@ -79,9 +79,7 @@ const Header = () => {
       <li className="text-base font-medium">
         <NavLink
           className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
-              : "hover:text-navlink p-1"
+            isActive ? " p-1 text-navlink" : "hover:text-navlink p-1"
           }
           to={"/join-event"}
         >
@@ -91,9 +89,7 @@ const Header = () => {
       <li className="text-base font-medium">
         <NavLink
           className={({ isActive }) =>
-            isActive
-              ? " p-1 text-navlink"
-              : "hover:text-navlink p-1"
+            isActive ? " p-1 text-navlink" : "hover:text-navlink p-1"
           }
           to={"/manage-events"}
         >
@@ -129,7 +125,7 @@ const Header = () => {
           Manage Events
         </NavLink>
       </li>
-            <li className="text-base font-medium">
+      <li className="text-base font-medium">
         <NavLink
           className={({ isActive }) =>
             isActive
@@ -191,39 +187,39 @@ const Header = () => {
             </div>
             <div className="w-full relative">
               <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-boxbg rounded-box z-1 mt-6 w-52 p-2 space-y-2 "
-            >
-              <li>
-                <div className="avatar space-x-2 py-2.5">
-                  <div className="ring-btn ring-offset-base-100 w-8 h-8 rounded-full ring-1 ring-offset-2">
-                    <img src={user ? user?.photoURL : userImg} />
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-boxbg rounded-box z-1 mt-6 w-52 p-2 space-y-2 "
+              >
+                <li>
+                  <div className="avatar space-x-2 py-2.5">
+                    <div className="ring-btn ring-offset-base-100 w-8 h-8 rounded-full ring-1 ring-offset-2">
+                      <img src={user ? user?.photoURL : userImg} />
+                    </div>
+                    <NavLink className="text-base font-medium">
+                      My Profile
+                    </NavLink>
                   </div>
-                  <NavLink className="text-base font-medium">
-                    My Profile
-                  </NavLink>
-                </div>
-              </li>
-              {mobileNavlink}
-              <li>
-                {user ? (
-                  <button
-                    onClick={handleSignOut}
-                    className="btn bg-gradient-to-r from-primary to-secondary text-white shadow-none px-5 sm:px-10 flex items-center"
-                  >
-                    <CiLogout size={22} /> Logout
-                  </button>
-                ) : (
-                  <Link
-                    className="btn bg-gradient-to-r from-primary to-secondary text-white shadow-none px-5 sm:px-10 flex items-center"
-                    to={"/auth/login"}
-                  >
-                    Login
-                    <CiLogin size={22} />
-                  </Link>
-                )}
-              </li>
-            </ul>
+                </li>
+                {mobileNavlink}
+                <li>
+                  {user ? (
+                    <button
+                      onClick={handleSignOut}
+                      className="btn bg-gradient-to-r from-primary to-secondary text-white shadow-none px-5 sm:px-10 flex items-center"
+                    >
+                      <CiLogout size={22} /> Logout
+                    </button>
+                  ) : (
+                    <Link
+                      className="btn bg-gradient-to-r from-primary to-secondary text-white shadow-none px-5 sm:px-10 flex items-center"
+                      to={"/auth/login"}
+                    >
+                      Login
+                      <CiLogin size={22} />
+                    </Link>
+                  )}
+                </li>
+              </ul>
             </div>
           </div>
           <Link to={"/"}>
@@ -236,11 +232,7 @@ const Header = () => {
         <div className="navbar-end space-x-5 relative">
           <div className=" lg:flex  flex-col hidden dropdown">
             {user && (
-              <div
-              role="button"
-              tabIndex={0}
-                className="group"
-              >
+              <div role="button" tabIndex={0} className="group">
                 <img
                   src={user ? user?.photoURL : userImg}
                   className="hidden ring-offset-base-100 sm:inline ring-btn w-10 h-10 rounded-full ring-1 ring-offset-3 cursor-pointer"

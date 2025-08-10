@@ -18,11 +18,11 @@ const Footer = () => {
           </p>
         </aside>
         <nav className="space-y-.5">
-          <h6 className="text-lg font-bold text-heading">Gardening</h6>
-          <Link className="link link-hover text-base">Resources</Link>
-          <Link className="link link-hover text-base">About Us</Link>
-          <Link className="link link-hover text-base">Contact</Link>
-          <Link className="link link-hover text-base">Shop</Link>
+          <h6 className="text-lg font-bold text-heading">Platform</h6>
+          <Link to={} className="link link-hover text-base">Upcoming Events</Link>
+          <Link className="link link-hover text-base">Features</Link>
+          <Link className="link link-hover text-base">Create Event</Link>
+          <Link className="link link-hover text-base">Join Event</Link>
         </nav>
         <nav className="space-y-.5">
           <h6 className="text-lg font-bold text-heading">Terms</h6>
