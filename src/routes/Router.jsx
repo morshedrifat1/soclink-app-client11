@@ -57,11 +57,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "event-details/:id",
-        element: (
-          <PrivateRoute>
-            <EventDetails></EventDetails>
-          </PrivateRoute>
-        ),
+        Component: EventDetails,
       },
       {
         path: "edit-event/:id",

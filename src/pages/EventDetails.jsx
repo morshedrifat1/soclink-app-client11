@@ -17,7 +17,7 @@ import {
   BsTwitterX,
 } from "react-icons/bs";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { Link, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { Slide, toast } from "react-toastify";
 import Modal from "../components/Modal";
 import { AuthContext } from "../context/AuthContext";
@@ -25,6 +25,8 @@ import { AuthContext } from "../context/AuthContext";
 const EventDetails = () => {
   const [singleEvent, setSingleEvent] = useState({});
   const { user, token } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate()
   // event date fomating
   const options = { year: "numeric", month: "long", day: "numeric" };
   // participants progress
@@ -44,18 +46,16 @@ const EventDetails = () => {
   // event details data load
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API}/event-details/${params.id}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-          email: user.email,
-        },
-      })
+      .get(`${import.meta.env.VITE_API}/event-details/${params.id}`)
       .then((res) => {
         setSingleEvent(res.data);
       });
-  }, [params, token, user.email]);
+  }, [params]);
   // handle join event
   const handleJoinEvent = () => {
+    if(!user){
+      return navigate("/auth/login", {state: location.pathname});
+    }
     const joinUserDetails = {
       eventId: singleEvent._id,
       name: user.displayName,
