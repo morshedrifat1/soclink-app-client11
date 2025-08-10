@@ -32,7 +32,7 @@ const HeroSection = () => {
     });
   }, []);
   return (
-    <div class="bg-cover bg-center h-screen relative px-5 bg-[url('/hero-banner-mobile.png')] sm:bg-[url('/hero-banner.jpg')]">
+    <div class="bg-cover bg-center h-150 sm:h-screen relative px-5 bg-[url('/hero-banner-mobile.png')] sm:bg-[url('/hero-banner.jpg')]">
       <div className="absolute inset-0 bg-gradient-to-b from-[#269bee90] to-[#269bee10] "></div>
       <div className="z-1 relative grid justify-center top-[7%] sm:top-[10%] lg:top-[15%] gap-3 sm:gap-4 mx-auto lg:w-190">
         {/* motion dev heading */}

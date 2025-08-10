@@ -6,6 +6,7 @@ import { IoIosMail } from "react-icons/io";
 import { MdPhoneInTalk } from "react-icons/md";
 import { FiMapPin } from "react-icons/fi";
 import { BsTwitterX } from "react-icons/bs";
+import { HashLink } from "react-router-hash-link";
 const Footer = () => {
   return (
     <div className="bg-boxbg">
@@ -19,10 +20,10 @@ const Footer = () => {
         </aside>
         <nav className="space-y-.5">
           <h6 className="text-lg font-bold text-heading">Platform</h6>
-          <Link to={} className="link link-hover text-base">Upcoming Events</Link>
-          <Link className="link link-hover text-base">Features</Link>
-          <Link className="link link-hover text-base">Create Event</Link>
-          <Link className="link link-hover text-base">Join Event</Link>
+          <Link to={'/upcoming-events'} className="link link-hover text-base">Upcoming Events</Link>
+          <HashLink className="tlink link-hover text-base" smooth to="/#features">Features</HashLink>
+          <Link to={'/create-event'} className="link link-hover text-base">Create Event</Link>
+          <Link to={'/join-event'} className="link link-hover text-base">Join Event</Link>
         </nav>
         <nav className="space-y-.5">
           <h6 className="text-lg font-bold text-heading">Terms</h6>

@@ -37,7 +37,7 @@ const LatestEvent = () => {
       <div className="flex items-center justify-center">
         <Link
           to="/upcoming-events"
-          className="btn px-12 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded shadow text-center mt-8"
+          className="btn px-12 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded shadow text-center mt-5"
         >
           View All
         </Link>
